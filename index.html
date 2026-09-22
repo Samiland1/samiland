@@ -4,27 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Samiland | Custom Crochet & Interactive Vocal Library</title>
+  
+  <!-- Modern Typography Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600;1,800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg-dark: #0d070e;
-      --card-bg: rgba(26, 15, 28, 0.75);
+      --bg-dark: #08030a;
+      --card-bg: rgba(22, 11, 26, 0.82);
       --pink-accent: #ff2a8d;
-      --pink-glow: #e040a6;
-      --purple-accent: #8b28a8;
-      --text-main: #f3e6f5;
-      --text-muted: #bda2c4;
-      --border-color: rgba(255, 42, 141, 0.25);
+      --pink-glow: rgba(255, 42, 141, 0.6);
+      --purple-accent: #a828e0;
+      --purple-glow: rgba(168, 40, 224, 0.4);
+      --text-main: #f9f0fa;
+      --text-muted: #cbb2d4;
+      --border-color: rgba(255, 42, 141, 0.35);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
-      background-color: var(--bg-dark);
+      background: radial-gradient(circle at 50% 10%, #1a0822 0%, #0d0411 50%, #050107 100%);
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
@@ -32,14 +39,27 @@
       padding-bottom: 50px;
     }
 
-    /* Ambient Lightning Flash Overlay */
+    /* Lightning Canvas for Real Visual Lightning Strikes */
+    #lightning-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.05s ease-in-out;
+    }
+
+    /* Ambient Screen Flash */
     #lightning-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(255, 230, 255, 0.12);
+      background: rgba(255, 220, 255, 0.15);
       pointer-events: none;
       opacity: 0;
       z-index: 1;
@@ -81,31 +101,33 @@
     }
 
     .brand-avatar {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       background: linear-gradient(135deg, var(--pink-accent), var(--purple-accent));
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
+      font-weight: 800;
       font-size: 20px;
       color: #fff;
-      box-shadow: 0 0 12px rgba(255, 42, 141, 0.5);
+      box-shadow: 0 0 15px var(--pink-glow), 0 0 30px var(--purple-glow);
     }
 
     .brand-title {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 800;
       letter-spacing: -0.5px;
+      text-shadow: 0 0 10px rgba(255, 42, 141, 0.4);
     }
 
     .brand-handle {
       font-size: 0.72rem;
       color: var(--pink-accent);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       display: block;
+      font-weight: 700;
     }
 
     .nav-actions {
@@ -114,7 +136,7 @@
     }
 
     .badge-btn {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--border-color);
       color: var(--text-main);
       padding: 6px 12px;
@@ -124,6 +146,13 @@
       align-items: center;
       gap: 5px;
       backdrop-filter: blur(8px);
+      box-shadow: 0 0 10px rgba(255, 42, 141, 0.15);
+      transition: all 0.3s;
+    }
+
+    .badge-btn:hover {
+      box-shadow: 0 0 15px var(--pink-glow);
+      border-color: var(--pink-accent);
     }
 
     /* Hero Section */
@@ -137,62 +166,67 @@
       border: 1px solid var(--pink-accent);
       color: var(--pink-accent);
       font-size: 0.68rem;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 1.5px;
-      padding: 4px 14px;
+      padding: 5px 16px;
       border-radius: 50px;
       text-transform: uppercase;
-      margin-bottom: 12px;
-      background: rgba(255, 42, 141, 0.08);
+      margin-bottom: 14px;
+      background: rgba(255, 42, 141, 0.12);
+      box-shadow: 0 0 12px var(--pink-glow);
     }
 
     .hero-title {
-      font-size: 1.9rem;
-      line-height: 1.2;
+      font-size: 2rem;
+      line-height: 1.25;
       font-weight: 800;
       margin-bottom: 12px;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     }
 
     .hero-title span {
       font-style: italic;
       color: var(--pink-accent);
-      font-weight: 400;
-      font-family: Georgia, serif;
+      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 0 15px var(--pink-glow);
     }
 
     .hero-desc {
       font-size: 0.88rem;
       color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 20px;
+      line-height: 1.55;
+      margin-bottom: 22px;
       padding: 0 10px;
     }
 
     .cta-button {
       display: block;
       width: 100%;
-      background: linear-gradient(90deg, #d81b7a, #9c27b0);
+      background: linear-gradient(90deg, #e60073, #8a00c2);
       color: white;
-      padding: 14px;
+      padding: 15px;
       border-radius: 12px;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 0.95rem;
-      box-shadow: 0 4px 20px rgba(216, 27, 122, 0.4);
-      border: none;
-      margin-bottom: 10px;
+      box-shadow: 0 4px 25px rgba(230, 0, 115, 0.5), 0 0 15px rgba(138, 0, 194, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 12px;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: all 0.25s ease;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
     }
 
-    .cta-button:active {
-      transform: scale(0.98);
+    .cta-button:hover {
+      box-shadow: 0 4px 30px rgba(230, 0, 115, 0.8), 0 0 25px rgba(138, 0, 194, 0.7);
+      transform: translateY(-1px);
     }
 
     .cta-secondary {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border-color);
-      box-shadow: none;
+      box-shadow: 0 0 12px rgba(255, 42, 141, 0.15);
     }
 
     /* Stats Grid */
@@ -208,14 +242,16 @@
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       padding: 12px 6px;
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 42, 141, 0.08);
     }
 
     .stat-val {
       font-size: 1.1rem;
       font-weight: 800;
       color: var(--pink-accent);
+      text-shadow: 0 0 8px var(--pink-glow);
     }
 
     .stat-lbl {
@@ -234,22 +270,25 @@
       font-size: 0.72rem;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      font-weight: 700;
+      font-weight: 800;
+      text-shadow: 0 0 8px var(--pink-glow);
     }
 
     .section-head h2 {
-      font-size: 1.4rem;
+      font-size: 1.45rem;
       font-weight: 800;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
     }
 
     /* Product & Vocal Cards */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 18px;
+      border-radius: 20px;
       overflow: hidden;
       margin-bottom: 20px;
       backdrop-filter: blur(12px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 42, 141, 0.12);
     }
 
     .card-img-wrap {
@@ -273,70 +312,76 @@
       background: var(--pink-accent);
       color: white;
       font-size: 0.65rem;
-      font-weight: 700;
-      padding: 4px 10px;
+      font-weight: 800;
+      padding: 4px 12px;
       border-radius: 20px;
       text-transform: uppercase;
+      box-shadow: 0 0 10px var(--pink-glow);
     }
 
     .price-tag {
       position: absolute;
       bottom: 12px;
       right: 12px;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(8, 3, 10, 0.85);
       border: 1px solid var(--pink-accent);
       color: white;
       font-size: 0.85rem;
-      font-weight: 700;
-      padding: 4px 10px;
+      font-weight: 800;
+      padding: 4px 12px;
       border-radius: 8px;
+      box-shadow: 0 0 10px var(--pink-glow);
     }
 
     .card-body {
-      padding: 16px;
+      padding: 18px;
     }
 
     .card-title {
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: 1.15rem;
+      font-weight: 800;
       margin-bottom: 6px;
     }
 
     .card-desc {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
-      line-height: 1.4;
-      margin-bottom: 14px;
+      line-height: 1.45;
+      margin-bottom: 16px;
     }
 
     /* Vocal Library Interactive Deck */
     .vocal-deck {
-      padding: 16px;
-      background: rgba(15, 8, 18, 0.85);
+      padding: 18px;
+      background: rgba(14, 6, 18, 0.9);
       border: 1px solid var(--pink-accent);
-      border-radius: 18px;
+      border-radius: 20px;
       margin-bottom: 24px;
+      box-shadow: 0 0 20px rgba(255, 42, 141, 0.25), inset 0 0 15px rgba(168, 40, 224, 0.15);
     }
 
     .audio-visualizer-box {
-      height: 60px;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
+      height: 65px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 42, 141, 0.2);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 4px;
       padding: 0 10px;
-      margin: 12px 0;
+      margin: 14px 0;
       overflow: hidden;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
     }
 
     .v-bar {
       width: 4px;
-      background: var(--pink-accent);
+      background: linear-gradient(180deg, #ff7bc1, var(--pink-accent));
       border-radius: 2px;
       height: 15%;
       transition: height 0.1s ease;
+      box-shadow: 0 0 6px var(--pink-glow);
     }
 
     .vocal-stems {
@@ -351,38 +396,43 @@
       align-items: center;
       justify-content: space-between;
       background: rgba(255, 255, 255, 0.04);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.8rem;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .stem-play {
       background: var(--pink-accent);
       border: none;
       color: white;
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
+      box-shadow: 0 0 10px var(--pink-glow);
     }
 
     footer {
       text-align: center;
       padding: 20px 0;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Thunder Flash Layer -->
+  <!-- Real Visual Lightning Strike Canvas -->
+  <canvas id="lightning-canvas"></canvas>
+
+  <!-- Thunder Flash Screen Overlay -->
   <div id="lightning-overlay"></div>
 
   <!-- Rain Canvas -->
@@ -440,8 +490,8 @@
     <div class="vocal-deck">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <div>
-          <h3 style="font-size: 1rem;">Celestial Whispers (Dry Stems)</h3>
-          <span style="font-size: 0.75rem; color: var(--pink-accent);">Key: F# Minor | 120 BPM</span>
+          <h3 style="font-size: 1.05rem; font-weight: 800;">Celestial Whispers (Dry Stems)</h3>
+          <span style="font-size: 0.75rem; color: var(--pink-accent); font-weight:700;">Key: F# Minor | 120 BPM</span>
         </div>
         <button class="badge-btn" onclick="togglePlayAll()">▶ Play Demo</button>
       </div>
@@ -466,7 +516,7 @@
         </div>
       </div>
 
-      <button class="cta-button" style="margin-top: 14px; margin-bottom: 0;">Download Sample Pack ($35 USD)</button>
+      <button class="cta-button" style="margin-top: 16px; margin-bottom: 0;">Download Sample Pack ($35 USD)</button>
     </div>
 
     <!-- Outfit Collection -->
@@ -492,7 +542,7 @@
     <!-- Product Card 2 -->
     <div class="card">
       <div class="card-img-wrap">
-        <span class="badge-tag" style="background:#9c27b0;">Popular Choice</span>
+        <span class="badge-tag" style="background:#a828e0; box-shadow: 0 0 10px var(--purple-glow);">Popular Choice</span>
         <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=600&q=80" alt="Pastel Coverup">
         <span class="price-tag">$120 USD</span>
       </div>
@@ -510,63 +560,103 @@
 
   <script>
     /* Rain Canvas Implementation */
-    const canvas = document.getElementById('rain-canvas');
-    const ctx = canvas.getContext('2d');
+    const rainCanvas = document.getElementById('rain-canvas');
+    const rainCtx = rainCanvas.getContext('2d');
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    function resizeRain() {
+      rainCanvas.width = window.innerWidth;
+      rainCanvas.height = window.innerHeight;
     }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    resizeRain();
+    window.addEventListener('resize', resizeRain);
 
-    const raindrops = Array.from({ length: 65 }, () => ({
+    const raindrops = Array.from({ length: 75 }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      length: Math.random() * 20 + 10,
-      speed: Math.random() * 10 + 6,
-      opacity: Math.random() * 0.3 + 0.1
+      length: Math.random() * 22 + 12,
+      speed: Math.random() * 11 + 7,
+      opacity: Math.random() * 0.35 + 0.15
     }));
 
     function drawRain() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      rainCtx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
       raindrops.forEach(drop => {
-        ctx.beginPath();
-        ctx.moveTo(drop.x, drop.y);
-        ctx.lineTo(drop.x, drop.y + drop.length);
-        ctx.strokeStyle = `rgba(255, 180, 220, ${drop.opacity})`;
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
+        rainCtx.beginPath();
+        rainCtx.moveTo(drop.x, drop.y);
+        rainCtx.lineTo(drop.x, drop.y + drop.length);
+        rainCtx.strokeStyle = `rgba(255, 180, 230, ${drop.opacity})`;
+        rainCtx.lineWidth = 1.3;
+        rainCtx.stroke();
 
         drop.y += drop.speed;
-        if (drop.y > canvas.height) {
+        if (drop.y > rainCanvas.height) {
           drop.y = -drop.length;
-          drop.x = Math.random() * canvas.width;
+          drop.x = Math.random() * rainCanvas.width;
         }
       });
       requestAnimationFrame(drawRain);
     }
     drawRain();
 
-    /* Thunder Strike FX */
-    const lightningOverlay = document.getElementById('lightning-overlay');
-    function triggerThunder() {
-      const delay = Math.random() * 6000 + 4000;
+    /* Real Visual Lightning Strikes */
+    const lCanvas = document.getElementById('lightning-canvas');
+    const lCtx = lCanvas.getContext('2d');
+    const lOverlay = document.getElementById('lightning-overlay');
+
+    function resizeLightning() {
+      lCanvas.width = window.innerWidth;
+      lCanvas.height = window.innerHeight;
+    }
+    resizeLightning();
+    window.addEventListener('resize', resizeLightning);
+
+    function drawLightningBolt(startX, startY) {
+      lCtx.clearRect(0, 0, lCanvas.width, lCanvas.height);
+      let curX = startX;
+      let curY = startY;
+
+      lCtx.beginPath();
+      lCtx.moveTo(curX, curY);
+
+      while (curY < lCanvas.height * 0.7) {
+        curX += (Math.random() - 0.5) * 60;
+        curY += Math.random() * 30 + 15;
+        lCtx.lineTo(curX, curY);
+      }
+
+      lCtx.strokeStyle = 'rgba(255, 235, 255, 0.95)';
+      lCtx.lineWidth = 2.5;
+      lCtx.shadowBlur = 15;
+      lCtx.shadowColor = '#ff2a8d';
+      lCtx.stroke();
+    }
+
+    function triggerThunderStrike() {
+      const delay = Math.random() * 5000 + 3500;
       setTimeout(() => {
-        lightningOverlay.style.opacity = '1';
+        const startX = Math.random() * lCanvas.width;
+        drawLightningBolt(startX, 0);
+        
+        lCanvas.style.opacity = '1';
+        lOverlay.style.opacity = '1';
+
         setTimeout(() => {
-          lightningOverlay.style.opacity = '0';
+          lCanvas.style.opacity = '0';
+          lOverlay.style.opacity = '0';
           setTimeout(() => {
-            lightningOverlay.style.opacity = '0.6';
+            drawLightningBolt(startX + 20, 0);
+            lCanvas.style.opacity = '0.8';
+            lOverlay.style.opacity = '0.5';
             setTimeout(() => {
-              lightningOverlay.style.opacity = '0';
-              triggerThunder();
+              lCanvas.style.opacity = '0';
+              lOverlay.style.opacity = '0';
+              triggerThunderStrike();
             }, 60);
           }, 80);
-        }, 50);
+        }, 60);
       }, delay);
     }
-    triggerThunder();
+    triggerThunderStrike();
 
     /* Audio Visualizer Simulator */
     const vizContainer = document.getElementById('visualizer');
