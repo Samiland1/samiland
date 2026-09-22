@@ -3,115 +3,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sami Land 👑 | Royal Vocals & Crochet Magic</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>SamiLand Template</title>
+    <style>
+        :root {
+            --bg-color: #0b070f;
+            --card-bg: #160c18;
+            --primary-pink: #e6007a;
+            --text-main: #ffffff;
+            --text-muted: #a099a5;
+            --accent-glow: rgba(230, 0, 122, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 50px;
+        }
+
+        /* --- Header --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: rgba(11, 7, 15, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .brand-handle {
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .currency-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #ff99cc;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .tagline {
+            display: inline-block;
+            background: #2a1124;
+            color: #ff66b2;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            font-style: italic;
+            color: #ff99cc;
+            font-family: "Georgia", serif;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            background: linear-gradient(90deg, #d40078, #ff0055);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            display: block;
+            width: 100%;
+            background: #2a1124;
+            color: #ff99cc;
+            border: 1px solid #4a1c3b;
+            padding: 16px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* --- Features Row --- */
+        .features {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 30px;
+        }
+
+        .feature-item h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .feature-item p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* --- Product Grid --- */
+        .collection {
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .section-title p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.9);
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .card-tag.pink {
+            background: var(--primary-pink);
+            color: white;
+        }
+
+        .card-price {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .card-info {
+            padding: 20px;
+        }
+
+        .card-info h3 {
+            font-size: 18px;
+            color: #ffb3d9;
+            margin-bottom: 8px;
+        }
+
+        .card-info p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .crafting-time {
+            font-size: 12px;
+            color: #ff66b2;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-order {
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Hero Header -->
-    <header class="hero">
-        <h1 class="princess-title">Sami Land</h1>
-        <p class="subtitle">👑 Princess Vocals, Dreamy Songs & Handcrafted Crochet 👑</p>
-        <a href="#vocal-samples" class="btn-royal">Explore Shop</a>
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <div class="logo-circle">S</div>
+            <div>
+                <div class="brand-name">SamiLand</div>
+                <div class="brand-handle">@CROCHETWSAMI</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="currency-badge">USD ($)</div>
+            <div>⚙️</div>
+            <div>≡</div>
+        </div>
     </header>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <ul>
-            <li><a href="#vocal-samples">Vocal Samples</a></li>
-            <li><a href="#songs">Original Songs</a></li>
-            <li><a href="#crochet">Crochet Shop</a></li>
-            <li><a href="#about">About</a></li>
-        </ul>
-    </nav>
+    <!-- Hero Section -->
+    <main>
+        <section class="hero">
+            <div class="tagline">Handmade in Thailand • @crochetwsami</div>
+            <h1>Custom Crochet Outfits & <span>Interactive</span> Vocal Library</h1>
+            <p>Custom handmade crochet fashion modeled directly by Sami (@crochetwsami) in Thailand, paired with a live frequency-reactive vocal library for producers worldwide.</p>
+            
+            <button class="btn-primary">Order Outfit Slot</button>
+            <button class="btn-secondary">📏 Size Calculator</button>
+        </section>
 
-    <main class="container">
-
-        <!-- Vocal Samples Section -->
-        <section id="vocal-samples" class="card">
-            <h2>💖 Dreamy Vocal Samples</h2>
-            <p>High-quality acapellas, vocal chops, and harmonies ready for your music productions.</p>
-
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>✨ Princess Vocal Pack Vol. 1</h3>
-                    <p>Sparkly lead stems, lush harmonies, and pop adlibs.</p>
-                    <audio controls>
-                        <source src="vocal-demo1.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <div class="price">$15.00</div>
-                    <a href="#" class="btn-buy">Buy Vocal Pack</a>
-                </div>
-
-                <div class="product-card">
-                    <h3>👑 Royalty Harmonies & Stems</h3>
-                    <p>Ethereal vocal runs and multi-layered harmonies.</p>
-                    <audio controls>
-                        <source src="vocal-demo2.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <div class="price">$20.00</div>
-                    <a href="#" class="btn-buy">Buy Vocal Pack</a>
-                </div>
+        <!-- Features -->
+        <section class="features">
+            <div class="feature-item">
+                <h3>100%</h3>
+                <p>Handcrafted</p>
+            </div>
+            <div class="feature-item">
+                <h3>Live FFT</h3>
+                <p>Audio Visualizer</p>
+            </div>
+            <div class="feature-item">
+                <h3>Global</h3>
+                <p>EMS Shipping</p>
             </div>
         </section>
 
-        <!-- Full Songs Section -->
-        <section id="songs" class="card">
-            <h2>🎵 Original Songs & Toplines</h2>
-            <p>Stream or license full original tracks and written toplines.</p>
+        <!-- Collection -->
+        <section class="collection">
+            <div class="section-title">
+                <h2>Handmade Outfit Collection</h2>
+                <p>Choose an outfit to request custom sizing. Sami hand-stitches each order individually in Chiang Mai.</p>
+            </div>
 
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>🌸 Dreamy Crown (Single)</h3>
-                    <p>Pop / Royalty Vocal Track with full license available.</p>
-                    <audio controls>
-                        <source src="song1.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <div class="price">$2.99</div>
-                    <a href="#" class="btn-buy">Get Track</a>
+            <!-- Product 1 -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <span class="card-tag pink">2 Slots Open</span>
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600" alt="Scallop Vest">
+                    <div class="card-price">$95 USD</div>
+                </div>
+                <div class="card-info">
+                    <h3>Tie-Front Maroon Scallop Vest</h3>
+                    <p>Deep maroon handcrafted tie-front vest with scalloped lace trim detailing.</p>
+                    <div class="card-footer">
+                        <div class="crafting-time">⏱ 1-2 Wks Crafting</div>
+                        <button class="btn-order">Order Custom Fit</button>
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Crochet Section -->
-        <section id="crochet" class="card">
-            <h2>🧶 Handmade Crochet Kingdom</h2>
-            <p>Cozy, custom, and cute princess-inspired crochet creations.</p>
-
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="img-placeholder">🌸 [Crochet Item Photo]</div>
-                    <h3>Pink Princess Plushie</h3>
-                    <p>Handmade with super soft velvet yarn and glitter ribbon.</p>
-                    <div class="price">$35.00</div>
-                    <a href="#" class="btn-buy">Order Crochet</a>
+            <!-- Product 2 -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <span class="card-tag">Custom Colors</span>
+                    <img src="https://images.unsplash.com/photo-1550614000-4b95dd26cc9a?auto=format&fit=crop&q=80&w=600" alt="Mesh Coverup">
+                    <div class="card-price">$120 USD</div>
                 </div>
-
-                <div class="product-card">
-                    <div class="img-placeholder">👑 [Crochet Beanie Photo]</div>
-                    <h3>Royal Crochet Crown Beanie</h3>
-                    <p>Keep cozy with this cute custom crown beanie.</p>
-                    <div class="price">$28.00</div>
-                    <a href="#" class="btn-buy">Order Custom Size</a>
+                <div class="card-info">
+                    <h3>Pastel Pink Mesh Coverup</h3>
+                    <p>Breathable open weave long cardigan crafted from soft pink cotton yarn.</p>
+                    <div class="card-footer">
+                        <div class="crafting-time">⏱ 2 Wks Crafting</div>
+                        <button class="btn-order">Order Custom Fit</button>
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <!-- About Section -->
-        <section id="about" class="card">
-            <h2>👑 About Sami Land</h2>
-            <p>Welcome to <strong>Sami Land</strong>—an artful fusion of handmade crochet creations, dreamy vocal sample packs, and pre-written song toplines straight from my castle studio.</p>
-        </section>
+            <!-- Product 3 -->
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <span class="card-tag pink">Popular Choice</span>
+                    <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&q=80&w=600" alt="Two-Piece Set">
+                    <div class="card-price">$135 USD</div>
+                </div>
+                <div class="card-info">
+                    <h3>Rose Crochet Two-Piece Set</h3>
+                    <p>Crochet halter top paired with ruffled skirt trimming. Customized to your waist.</p>
+                    <div class="card-footer">
+                        <div class="crafting-time">⏱ 2-3 Wks Crafting</div>
+                        <button class="btn-order">Order Custom Fit</button>
+                    </div>
+                </div>
+            </div>
 
+        </section>
     </main>
-
-    <footer>
-        <p>✨ Made with love & magic in Sami Land ✨ &copy; 2026</p>
-    </footer>
 
 </body>
 </html>
